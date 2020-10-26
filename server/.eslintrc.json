@@ -23,7 +23,17 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages", {
+        "ts": "never"
+      }
+    ],
+    "camelcase": "off",
+    "class-methods-use-this": "off",
+    "no-useless-constructor": "off"
   },
   "settings": {
     "import/resolver": {
