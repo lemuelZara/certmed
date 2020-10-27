@@ -5,11 +5,12 @@
     "lib": ["ES2018"],
     "allowJs": true,
     "outDir": "./dist",
-    "rootDir": "./src/",
+    "rootDir": "./src",
     "typeRoots": [
       "./node_modules/@types",
       "./src/@types"
     ],
+    "strictPropertyInitialization": false,
     "removeComments": true,
     "strict": true,
     "esModuleInterop": true,
