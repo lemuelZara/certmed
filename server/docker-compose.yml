@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  certmed_db:
+    image: postgres
+    container_name: certmed
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: certmed
+    volumes:
+      - certmed-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  certmed-data:
