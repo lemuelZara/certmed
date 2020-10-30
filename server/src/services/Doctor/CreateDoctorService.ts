@@ -1,11 +1,16 @@
 import { Doctor } from '../../entities/Doctor';
+
 import AppError from '../../errors/AppError';
+
 import { BCryptHashProvider } from '../../providers/HashProvider/BCryptHashProvider';
 import IHashProvider from '../../providers/HashProvider/IHashProvider';
+
 import { DoctorRepository } from '../../repositories/Doctor/DoctorRepository';
 import IDoctorRepository from '../../repositories/Doctor/IDoctorRepository';
+
 import ITypeRepository from '../../repositories/Type/ITypeRepository';
 import { TypeRepository } from '../../repositories/Type/TypeRepository';
+
 import IUserRepository from '../../repositories/User/IUserRepository';
 import { UserRepository } from '../../repositories/User/UserRepository';
 
@@ -38,9 +43,14 @@ export class CreateDoctorService {
 
   public async execute({ name, email, password }: Request): Promise<Doctor> {
     const findType = await this.typeRepository.findByTypeName('Médico');
+    const emailIsBeingUsed = await this.userRepository.findByEmail(email);
 
-    if (findType === undefined) {
+    if (!findType) {
       throw new AppError('O tipo de usuário não existe!');
+    }
+
+    if (emailIsBeingUsed) {
+      throw new AppError('O Email já está sendo usado!');
     }
 
     const hashPassword = await this.hashProvider.generateHash(password);
