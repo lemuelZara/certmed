@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
+
 import { BCryptHashProvider } from '../providers/HashProvider/BCryptHashProvider';
 
 import { DoctorRepository } from '../repositories/Doctor/DoctorRepository';
 import { TypeRepository } from '../repositories/Type/TypeRepository';
 import { UserRepository } from '../repositories/User/UserRepository';
+
 import { CreateDoctorService } from '../services/Doctor/CreateDoctorService';
 
 export class DoctorController {
@@ -23,6 +25,8 @@ export class DoctorController {
     );
 
     const doctor = await doctorService.execute({ name, email, password });
+
+    delete doctor.user.password;
 
     return response.status(201).json(doctor);
   }
