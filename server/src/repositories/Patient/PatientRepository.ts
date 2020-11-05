@@ -11,6 +11,17 @@ export class PatientRepository implements IPatientRepository {
     this.ormRepository = getRepository(Patient);
   }
 
+  public async findById(id: number): Promise<Patient | undefined> {
+    const patient = await this.ormRepository.findOne({
+      relations: ['user'],
+      where: {
+        user: id,
+      },
+    });
+
+    return patient;
+  }
+
   public async create({ user }: ICreatePatientDTO): Promise<Patient> {
     const patient = this.ormRepository.create({ user });
 
