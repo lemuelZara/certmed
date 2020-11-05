@@ -1,4 +1,11 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Appointment } from './Appointment';
 
 import { User } from './User';
 
@@ -14,4 +21,10 @@ export class Doctor {
   @ManyToOne(() => User, (user) => user.doctors)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => Appointment, (appointment) => appointment.doctor, {
+    cascade: ['insert', 'update', 'remove'],
+  })
+  @JoinColumn({ name: 'doctor_id' })
+  appointments: Appointment[];
 }
