@@ -11,6 +11,17 @@ export class DoctorRepository implements IDoctorRepository {
     this.ormRepository = getRepository(Doctor);
   }
 
+  public async findById(id: number): Promise<Doctor | undefined> {
+    const doctor = await this.ormRepository.findOne({
+      relations: ['user'],
+      where: {
+        user: id,
+      },
+    });
+
+    return doctor;
+  }
+
   public async create({ user }: ICreateDoctorDTO): Promise<Doctor> {
     const doctor = this.ormRepository.create({ user });
 
