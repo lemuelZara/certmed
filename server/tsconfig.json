@@ -18,5 +18,8 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+
+    // Debug com os Typescript e VSCode
+    "sourceMap": true
   }
 }
