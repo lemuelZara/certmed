@@ -6,7 +6,6 @@ const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
 interface IStorageConfig {
   tmpFolder: string;
-  uploadsFolder: string;
   multer: {
     storage: StorageEngine;
   };
@@ -14,7 +13,6 @@ interface IStorageConfig {
 
 export default {
   tmpFolder,
-  uploadsFolder: path.resolve(tmpFolder, 'uploads'),
   multer: {
     storage: multer.diskStorage({
       destination: tmpFolder,
