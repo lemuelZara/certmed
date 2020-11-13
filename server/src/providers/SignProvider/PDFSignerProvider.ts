@@ -14,8 +14,6 @@ export class PDFSignerProvider implements ISignProvider {
     const document = fs.readFileSync(path_document);
     const certificate = fs.readFileSync(path_certificate);
 
-    const signPdfStream = fs.createWriteStream(path_document);
-
     const signedPdf = await sign(document, certificate, password_certificate, {
       reason: '2',
       email: '',
@@ -51,6 +49,6 @@ export class PDFSignerProvider implements ISignProvider {
       },
     });
 
-    signPdfStream.write(signedPdf);
+    fs.writeFileSync(path_document, signedPdf);
   }
 }
