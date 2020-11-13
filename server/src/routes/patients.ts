@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 
 import { PatientController } from '../controllers/PatientController';
+import { AppointmentController } from '../controllers/AppointmentController';
 
 import ensureAuthentication from '../middlewares/EnsureAuthentication';
 import authenticationPatient from '../middlewares/AuthenticationPatient';
@@ -9,6 +10,7 @@ import authenticationPatient from '../middlewares/AuthenticationPatient';
 const patientRoutes = Router();
 
 const patientController = new PatientController();
+const appointmentController = new AppointmentController();
 
 patientRoutes.post(
   '/',
@@ -26,5 +28,10 @@ patientRoutes.use(ensureAuthentication);
 patientRoutes.get('/profile', authenticationPatient, (_, res) => {
   return res.json({ ok: true });
 });
+patientRoutes.get(
+  '/appointments',
+  authenticationPatient,
+  appointmentController.showAppointmentPatient,
+);
 
 export { patientRoutes };

@@ -38,6 +38,10 @@ doctorRoutes.post(
   upload.single('document'),
   appointmentController.create,
 );
-doctorRoutes.get('/appointments');
+doctorRoutes.get(
+  '/appointments',
+  authenticationDoctor,
+  appointmentController.showAppointmentDoctor,
+);
 
 export { doctorRoutes };
