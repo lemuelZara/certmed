@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import fs from 'fs';
 
 import { PDFSignerProvider } from '../providers/SignProvider/PDFSignerProvider';
 
@@ -9,8 +8,11 @@ import { DocumentRepository } from '../repositories/Document/DocumentRepository'
 import { PatientRepository } from '../repositories/Patient/PatientRepository';
 
 import { CreateAppointmentService } from '../services/Appointment/CreateAppointmentService';
+import { ListAppointmentDoctorService } from '../services/Appointment/ListAppointmentDoctorService';
+import { ListAppointmentPatientService } from '../services/Appointment/ListAppointmentPatientService';
 import { FindDoctorByIDService } from '../services/Doctor/FindDoctorByIdService';
 import { SignDocumentService } from '../services/Document/SignDocumentService';
+import { FindPatientByIdService } from '../services/Patient/FindPatientByIdService';
 
 export class AppointmentController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -60,5 +62,69 @@ export class AppointmentController {
     });
 
     return response.status(201).json(appointment);
+  }
+
+  public async showAppointmentDoctor(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.user;
+
+    const doctor_id = parseInt(id, 10);
+
+    const appointmentRepository = new AppointmentRepository();
+    const doctorRepository = new DoctorRepository();
+
+    const appointmentService = new ListAppointmentDoctorService(
+      appointmentRepository,
+    );
+    const doctorService = new FindDoctorByIDService(doctorRepository);
+
+    const doctor = await doctorService.execute({ id: doctor_id });
+
+    const appointments = await appointmentService.execute({
+      id: doctor.id,
+    });
+
+    const newAppointments = appointments.map((appointment) => {
+      delete appointment.doctor.user.password;
+      delete appointment.patient.user.password;
+
+      return appointment;
+    });
+
+    return response.status(200).json(newAppointments);
+  }
+
+  public async showAppointmentPatient(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const { id } = request.user;
+
+    const patient_id = parseInt(id, 10);
+
+    const appointmentRepository = new AppointmentRepository();
+    const patientRepository = new PatientRepository();
+
+    const appointmentService = new ListAppointmentPatientService(
+      appointmentRepository,
+    );
+    const patientService = new FindPatientByIdService(patientRepository);
+
+    const patient = await patientService.execute({ id: patient_id });
+
+    const appointments = await appointmentService.execute({
+      id: patient.id,
+    });
+
+    const newAppointments = appointments.map((appointment) => {
+      delete appointment.doctor.user.password;
+      delete appointment.patient.user.password;
+
+      return appointment;
+    });
+
+    return response.status(200).json(newAppointments);
   }
 }
