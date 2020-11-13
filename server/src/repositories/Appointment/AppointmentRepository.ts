@@ -11,6 +11,40 @@ export class AppointmentRepository implements IAppointmentRepository {
     this.ormRepository = getRepository(Appointment);
   }
 
+  public async findByDoctorId(id: number): Promise<Appointment[]> {
+    const appointments = await this.ormRepository.find({
+      relations: [
+        'doctor',
+        'doctor.user',
+        'patient',
+        'patient.user',
+        'document',
+      ],
+      where: {
+        doctor: id,
+      },
+    });
+
+    return appointments;
+  }
+
+  public async findByPatientId(id: number): Promise<Appointment[]> {
+    const appointments = await this.ormRepository.find({
+      relations: [
+        'doctor',
+        'doctor.user',
+        'patient',
+        'patient.user',
+        'document',
+      ],
+      where: {
+        patient: id,
+      },
+    });
+
+    return appointments;
+  }
+
   public async create({
     date,
     description,
