@@ -10,16 +10,30 @@ export default createGlobalStyle`
 
   html {
     font-size: 62.5%;
+    height: 100%;
   }
 
   body {
-    background: #f5f5f5;
+    height: auto;
+    background: #efefef;
     color: #484041;
+    text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
   }
 
+  body, #root {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #root {
+    height: 100%;
+  }
+
   body, input, button {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 1.2rem;
   }
 
