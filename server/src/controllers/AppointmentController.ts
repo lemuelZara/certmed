@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { PDFSignerProvider } from '../providers/SignProvider/PDFSignerProvider';
+import { NodeSignPDFProvider } from '../providers/SignProvider/NodeSignPDFProvider';
 
 import { AppointmentRepository } from '../repositories/Appointment/AppointmentRepository';
 import { DoctorRepository } from '../repositories/Doctor/DoctorRepository';
@@ -17,12 +17,7 @@ import { FindPatientByIdService } from '../services/Patient/FindPatientByIdServi
 export class AppointmentController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { filename, path } = request.file;
-    const {
-      date,
-      description,
-      document_type,
-      patient: patient_id,
-    } = request.body;
+    const { description, document_type, patient: patient_id } = request.body;
     const { id } = request.user;
 
     const doctor_id = parseInt(id, 10);
@@ -32,7 +27,7 @@ export class AppointmentController {
     const doctorRepository = new DoctorRepository();
     const patientRepository = new PatientRepository();
 
-    const signProvider = new PDFSignerProvider();
+    const signProvider = new NodeSignPDFProvider();
 
     const appointmentService = new CreateAppointmentService(
       appointmentRepository,
@@ -53,7 +48,7 @@ export class AppointmentController {
     });
 
     const appointment = await appointmentService.execute({
-      date,
+      date: new Date(),
       description,
       documentType: document_type,
       filename,

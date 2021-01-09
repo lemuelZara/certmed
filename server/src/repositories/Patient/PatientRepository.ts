@@ -29,4 +29,12 @@ export class PatientRepository implements IPatientRepository {
 
     return patient;
   }
+
+  public async show(): Promise<Patient[]> {
+    const patients = await this.ormRepository.find({
+      relations: ['user'],
+    });
+
+    return patients;
+  }
 }

@@ -1,5 +1,5 @@
 import ISignProvider from '../../providers/SignProvider/ISignProvider';
-import { PDFSignerProvider } from '../../providers/SignProvider/PDFSignerProvider';
+import { NodeSignPDFProvider } from '../../providers/SignProvider/NodeSignPDFProvider';
 
 interface Request {
   signer: string;
@@ -11,7 +11,7 @@ interface Request {
 export class SignDocumentService {
   private signProvider: ISignProvider;
 
-  constructor(signProvider: PDFSignerProvider) {
+  constructor(signProvider: NodeSignPDFProvider) {
     this.signProvider = signProvider;
   }
 

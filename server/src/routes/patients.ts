@@ -23,6 +23,7 @@ patientRoutes.post(
   }),
   patientController.create,
 );
+patientRoutes.get('/', patientController.index);
 
 patientRoutes.use(ensureAuthentication);
 patientRoutes.get('/profile', authenticationPatient, (_, res) => {

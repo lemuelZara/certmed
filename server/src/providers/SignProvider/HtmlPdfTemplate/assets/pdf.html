@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <meta charset="utf8">
+    <title>Signature</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+        body {
+          padding: 0;
+          margin: 0;
+          border: 0;
+          outline: 0;
+          box-sizing: border-box;
+          font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .header img {
+          width: 50px;
+        }
+
+        .container {
+          background: #eee;
+          border-radius: 10px;
+          margin: 30px;
+          padding: 30px;
+          color: #000;
+        }
+
+        .content h2 {
+          color: #4ad295;
+        }
+
+        .info .doctor, .date {
+          display: -webkit-box;
+          display: -webkit-flex;
+          -webkit-flex-wrap: wrap;
+          display: flex;
+          flex-wrap: wrap;
+          margin-right: 50px;
+        }
+
+        .info {
+          display: -webkit-box;
+          display: -webkit-flex;
+          -webkit-flex-wrap: wrap;
+          display: flex;
+          flex-wrap: wrap;
+        }
+
+        .info p {
+          font-size: 13px;
+        }
+
+        .info .doctor img {
+          width: 25px;
+          margin-right: 15px;
+        }
+
+        .info .date img {
+          width: 25px;
+          margin-right: 20px;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <div class="header">
+          <img src="{{image}}" alt="">
+        </div>
+        <div class="content">
+          <h2>Assinado com sucesso!</h2>
+          <p>Este documento foi assinado digitalmente por um médico.</p>
+        </div>
+        <div class="info">
+          <div class="doctor">
+            <img src="{{doctor}}" alt="">
+            <p><span>Médico: </span>{{doctor_name}}</p>
+          </div>
+          <div class="date">
+            <img src="{{date}}" alt="">
+            <p><span>Data: </span>{{sign_date}}</p>
+          </div>
+        </div>
+      </div>
+  </body>
+</html>

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { BCryptHashProvider } from '../providers/HashProvider/BCryptHashProvider';
 
 import { UserRepository } from '../repositories/User/UserRepository';
+
 import { AuthenticationUserService } from '../services/AuthenticationUserService';
 
 export class SessionController {

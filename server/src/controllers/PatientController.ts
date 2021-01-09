@@ -7,6 +7,7 @@ import { TypeRepository } from '../repositories/Type/TypeRepository';
 import { UserRepository } from '../repositories/User/UserRepository';
 
 import { CreatePatientService } from '../services/Patient/CreatePatientService';
+import { ShowPatientService } from '../services/Patient/ShowPatientService';
 
 export class PatientController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -29,5 +30,15 @@ export class PatientController {
     delete patient.user.password;
 
     return response.status(201).json(patient);
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const patientRepository = new PatientRepository();
+
+    const patientService = new ShowPatientService(patientRepository);
+
+    const patients = await patientService.execute();
+
+    return response.status(200).json(patients);
   }
 }

@@ -21,5 +21,8 @@
 
     // Debug com os Typescript e VSCode
     "sourceMap": true
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
