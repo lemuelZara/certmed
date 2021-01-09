@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import SigIn from '../pages/SigIn';
 import DoctorDashboard from '../pages/Doctor/Dashboard';
 import PatientDashboard from '../pages/Patient/Dashboard';
+import Appointment from '../pages/Doctor/Appointment';
 import DoctorPrivateRoute from './DoctorPrivateRoute';
 import PatientPrivateRoute from './PatientPrivateRoute';
 import Route from './Route';
@@ -15,6 +16,11 @@ const Routes: React.FC = () => (
     <DoctorPrivateRoute
       path="/doctor/profile"
       component={DoctorDashboard}
+      isPrivate
+    />
+    <DoctorPrivateRoute
+      path="/doctor/appointment"
+      component={Appointment}
       isPrivate
     />
     <PatientPrivateRoute

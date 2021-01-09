@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
         <ProfileIcon />
         <span>Bem vindo(a), Dr. {user.name}</span>
 
-        <Link to="/appointments">Cadastrar uma nova consulta</Link>
+        <Link to="/doctor/appointment">Cadastrar uma nova consulta</Link>
 
         <button type="button" onClick={signOut}>
           <FaPowerOff size={20} color="#4ad295" />

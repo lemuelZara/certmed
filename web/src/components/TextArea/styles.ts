@@ -33,11 +33,16 @@ export const Container = styled.div<ContainerProps>`
       border-color: #036873;
     `}
 
-  input {
+  textarea {
     flex: 1;
     border: 0;
     padding: 1rem;
     font-size: 1.4rem;
+    height: 20rem;
+    background: none;
+    font-size: 1.4rem;
+    resize: none;
+    font-family: inherit;
   }
 
   > svg {
