@@ -2,8 +2,8 @@
 <p align="center">Um protótipo de software web para assinatura digital e autenticação de documentos médicos.</p>
 
 <br>
-Projeto desenvolvido para o TCC de Análise e Desenvolvimento de Sistemas do IFSP - Campus Votuporanga,
-
+<p align="center">Projeto desenvolvido para o TCC de Análise e Desenvolvimento de Sistemas do IFSP - Campus Votuporanga</p>
+<br>
 
 <img src="./.github/login.png">
 <img src="./.github/dashboard.png">
