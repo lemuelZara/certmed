@@ -43,7 +43,7 @@ export class AppointmentController {
     await documentService.execute({
       signer: doctor.user.name,
       path_certificate: './assets/evandrocertificado.pfx',
-      password_certificate: 'telerad!.sao',
+      password_certificate: '',
       path_document: path,
     });
 

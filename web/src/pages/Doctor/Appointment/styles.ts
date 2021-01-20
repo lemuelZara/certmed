@@ -66,5 +66,15 @@ export const Content = styled.div`
   > form {
     width: 100%;
     max-width: 40rem;
+
+    > button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 1.2rem;
+      border: 0;
+      border-radius: 0.8rem;
+      background: #036873;
+      color: #fff;
+    }
   }
 `;
